@@ -27,64 +27,26 @@
 
 </head>
 
-<body >
-    <dialog id="myDialog" style=" max-width: 500px; margin: auto;">
-        <form style="background-color: antiquewhite;">
-            <fieldset>
-                <h4>
-                    Cập nhật thông tin nhân viên <button type='button' id='close' data-dismiss='modal'
-                                                         onclick="closeDialog()">
-                        &times;
-                    </button>
-                </h4>
-                <hr>
-                <ul id="updateform_errList"></ul>
-                <div class="form-group">
-                    <label for="TextInput"> Mã nhân viên:</label>
-                    <input type="text" id="idnv" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="TextInput"> Họ tên: </label>
-                    <input type="text" id="ho-ten" class="form-control">
-                </div>
-                <div class="sex">
-                    <label>Giới tính:</label>
-                    <div class="sex">
-                        <input class="radioBtnClass" type="radio" id="male" name="fav_language" value="true">
-                        <label for="male">Nam</label>
-                        <input class="radioBtnClass" type="radio" id="female" name="fav_language" value="false">
-                        <label for="female">Nữ</label>
-                    </div>
-                </div>
-                <div class="yearw">
-                    <label for="yearw">Năm sinh:</label>
-                    <select id="yearw" class="year" style="float: right;">
-                        <option> Year</option>
-                    </select>
-                </div>
-                <div class="errMsg"></div>
-                <button type="submit" id="save" class="btn btn-primary" style="float: right;">Lưu</button>
-            </fieldset>
-        </form>
-    </dialog>
-    <!------------- Modal ------------->
-    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<body>
+    <div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: forestgreen;">
+            <div class="modal-content" style="background-color: blanchedalmond;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Cập nhật thông tin nhân viên
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label for="">Mã nhân viên</label>
-                        <input type="text" class="idnv form-control" />
+                        <input type="text" id="idnv" class="idnv form-control" />
                     </div>
                     <div class="form-group mb-3">
                         <label for="">Họ tên</label>
-                        <input type="text" class="ho-ten form-control" />
+                        <input type="text" id="ho-ten" class="ho-ten form-control" />
                     </div>
                     <div class="form-group mb-3">
                         <label>Giới tính:</label>
@@ -97,19 +59,63 @@
                     </div>
                     <div class="year">
                         <label for="year" style="float: left">Năm sinh:</label>
-                        <select id="year" class="year" style="float: left;">
+                        <input list="year" name="year" id="years" >
+                        <datalist id="year">
                             <option> Year</option>
-                        </select>
+                        </datalist>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary add_staff">Save</button>
+                    <button type="button" class="btn btn-primary edit" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
     </div>
-    <!---  End Modal    --->
+    <!------------- Modal Add Staff ------------->
+    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: blanchedalmond;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label for="">Mã nhân viên</label>
+                        <input type="text" id="idnvAdd" class="idnv form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Họ tên</label>
+                        <input type="text" id="ho-tenAdd" class="ho-ten form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Giới tính:</label>
+                        <div class="sex">
+                            <input class="radioBtnClassAdd" type="radio" id="maleAdd" name="fav_language" value="true">
+                            <label for="male">Nam</label>
+                            <input class="radioBtnClassAdd" type="radio" id="femaleAdd" name="fav_language" value="false">
+                            <label for="female">Nữ</label>
+                        </div>
+                    </div>
+                    <div class="year">
+                        <label for="yearAdd" style="float: left">Năm sinh:</label>
+                        <input list="yearAdd" name="yearAdd" id="yearsAdd">
+                        <datalist id="yearAdd">
+                            <option> Year</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary create" data-dismiss="modal">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---  End Modal Add   --->
     <div id="smg"></div>
     <div class="container py-5">
         <div class="row">
@@ -118,7 +124,7 @@
                     <div class="card-header">
                         <h4>
                             DANH SÁCH NHÂN VIÊN
-                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-right btn-sm">Add New</a> <br /><br />
+                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-right btn-sm" id="addStaff">Add New</a> <br /><br />
                         </h4>
                     </div>
                     <div class="card-body">
@@ -140,43 +146,17 @@
             </div>
         </div>
     </div>
-            <!---------------------------------------->
-    <!--<div class="limiter">
-        <div class="container-table100">
-            <div class="wrap-table100">
-                <div class="table100">
-                    <div class="card-header">
-                        <h4>
-                            DANH SÁCH NHÂN VIÊN
-                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-end btn-sm" onclick="AddNew(0)">Add New</a>
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <table>
-                            <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Mã nhân viên</th>
-                                    <th class="column2">Họ tên</th>
-                                    <th class="column3">Năm sinh</th>
-                                    <th class="column4">Giới tính</th>
-                                </tr>
-                            </thead>
-                            <tbody id="load_data" style="text-align: center">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-    <!-- script -->
+
+    <!-------------------------------------- SCRIPT ------------------------------------ -->
     <script>
+        var host = "https://localhost:44391/api";
+        var x = document.getElementById("Edit");
+
+
+        // LOAD DATA
         $(document).ready(function () {
             LoadData();
         });
-        var host = "https://localhost:44391/api";
-        var x = document.getElementById("myDialog");
-
         function LoadData() {
             $.ajax({
                 //host
@@ -188,7 +168,7 @@
 
                     $.each(rs, function (i, item) {
                         str += "<tr>";
-                        str += "<td style='text-align: center' ><a href='#' onclick='javascript:showDialog(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
                         str += "<td style='text-align: center'>" + item.hoTen + "</td>";
                         str += "<td style='text-align: center'>" + item.namSinh + "</td>";
                         str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
@@ -201,8 +181,43 @@
                 }
             });
         }
-        function showDialog(maNV) {
-            x.showModal();
+
+        // Add Staff
+        $("body").on("click", ".create", function (e) {
+            var data = {
+                'maNV': $('idnv').val(),
+                'hoTen': $('#ho-ten').val(),
+                'namSinh': $('#year').val(),
+                'gioiTinh': $('input[class="radioBtnClass"]:checked').val() === 'true' ? true : false,
+            }
+            var _staff = {};
+            _staff.maNV = $("#idnvAdd").val();
+            _staff.hoTen = $("#ho-tenAdd").val();
+            _staff.gioiTinh = $('input[class="radioBtnClassAdd"]:checked').val() === 'true' ? true : false;
+            _staff.namSinh = $("#yearAdd").val();
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: host + '/NhanVien/Create',
+                data: JSON.stringify(_staff),
+                contentType: 'application/json',
+                dataType: 'html',
+                success: function (r) {
+                    console.log(r);
+                    if (r) {
+                        alert("Add New Staff.");
+                    } else {
+                        alert("Staff not found.");
+                    }
+                    LoadData();
+                }
+            });
+        });
+
+
+
+        // Show Modal 1 NV
+        function ShowModal(maNV) {
             $.ajax({
                 url: host + '/NhanVien/FindByMaNV:' + maNV,
                 type: 'GET',
@@ -220,12 +235,9 @@
                 }
             });
         }
-        function closeDialog() {
-            x.close();
-        }
 
-        // UPDATE 2
-        $("body").on("click", "#save", function (e) {
+        // UPDATE
+        $("body").on("click", ".edit", function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
             var _staff = {};
@@ -246,14 +258,12 @@
                     } else {
                         alert("Staff not found.");
                     }
-                    closeDialog();
                     LoadData();
                 }
             });
         });
 
-        //
-
+        // YEAR select
         (function () {
             let year_selected = (new Date).getDate(); // current year
             let option = '';
@@ -266,94 +276,8 @@
             }
             option += '</datalist>';
             document.getElementById("year").innerHTML = option;
+            document.getElementById("yearAdd").innerHTML = option;
         })();
-                        //-------------------------------- TEST --------------
-                            
-            //if (r.status == 400) {
-            //    $('#updateform_errList').html("");
-            //    $('#updateform_errList').addClass('alert alert-danger');
-            //    $.each(r.errors, function (key, err_values) {
-            //        $('#updateform_errList').append('<li>' + err_values + '</li>');
-            //    });
-            //} else if (r.status == 404) {
-            //    $('#updateform_errList').html("");
-            //    $('#success_message').addClass('alert alert-danger');
-            //    $('#success_message').text(r.message);
-            //} else {
-            //    $('#updateform_errList').html("");
-            //    $('#success_message').html("");
-            //    $('#success_message').addClass('alert alert-danger');
-            //    $('#success_message').text(r.message);
-            //    $('#myDialog').modal('hide');
-            // Data
-            function validateData() {
-                var txtID = $("#idnv").val();
-                var txtName = $("#ho-ten").val();
-                var sex = $('input[class="radioBtnClass"]:checked').val();
-                var txtYear = $("#year").val();
-                var errMsg = "";
-                var errCount = 0;
-                if (txtName.length <= 0) {
-                    errCount++;
-                    errMsg += "<li>Please enter Name.</li>";
-                }
-                if (txtID.length <= 0) {
-                    errCount++;
-                    errMsg += "<li>Please enter Email.</li>";
-                }
-                if (txtYear.length <= 0) {
-                    errCount++;
-                    errMsg += "<li>Please enter Age.</li>";
-                }
-                if (errCount > 0) {
-
-                    $(".errMsg ul").remove()
-                    $(".errMsg").append("<ul>" + errMsg + "</ul>");
-                    $(".errMsg").slideDown('slow');
-                }
-                return errCount;
-            }
-                        // UPDATE 1
-                        //function updateData() {
-                        //    var errCount = validateData();
-                        //    if (errCount == 0) {
-                        //        //var _staff = {};
-                        //        //_staff.maNV = $("#idnv").val();
-                        //        //_staff.hoTen = $("#ho-ten").val();
-                        //        //_staff.gioiTinh = $('input[class="radioBtnClass"]:checked').val();
-                        //        //_staff.namSinh = $("#year").val();
-
-                        //        var data = {
-                        //            'hoTen': $('#ho-ten').val(),
-                        //            'namSinh': $('#year').val(),
-                        //            'gioiTinh': $('input[class="radioBtnClass"]:checked').val()
-                        //        }
-                        //        $.ajax({
-                        //            type: "PUT",
-                        //            url: host + '/NhanVien/Edit:' + _staff.maNV,
-                        //            data: data,
-                        //            contentType: "application/json; charset=utf-8",
-                        //            datatype: "jsondata",
-                        //            async: "true",
-                        //            success: function (response) {
-                        //                $(".errMsg ul").remove();
-                        //                var myObject = eval('(' + response.d + ')');
-                        //                if (myObject > 0) {
-                        //                    bindData();
-                        //                    $(".errMsg").append("<ul><li>Data updated successfully</li></ul>");
-                        //                }
-                        //                else {
-                        //                    $(".errMsg").append("<ul><li>Opppps something went wrong.</li></ul>");
-                        //                }
-                        //                $(".errMsg").show("slow");
-                        //                clear();
-                        //            },
-                        //            error: function (response) {
-                        //                alert(response.status + ' ' + response.statusText);
-                        //            }
-                        //        });
-                        //    }
-                        //}
 
     </script>
 
