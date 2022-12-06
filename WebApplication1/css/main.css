@@ -85,10 +85,6 @@ iframe {
     width: 100%;
     min-height: 100vh;
     background: #cd27e2;
-    background: -webkit-linear-gradient(45deg, #4158d0, #cd27e2);
-    background: -o-linear-gradient(45deg, #4158d0, #cd27e2);
-    background: -moz-linear-gradient(45deg, #4158d0, #cd27e2);
-    background: linear-gradient(45deg, #4158d0, #cd27e2);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -202,6 +198,10 @@ tbody tr:hover {
     width: auto;
     text-align: center
 }
+.column5 {
+    width: auto;
+    text-align: center
+}
 
 
 @media screen and (max-width:992px) {
@@ -263,7 +263,7 @@ tbody tr:hover {
     }
 
     table tbody tr td:nth-child(5):before {
-        content: "Quantity"
+        content: "Delete"
     }
 
     table tbody tr td:nth-child(6):before {
@@ -271,9 +271,10 @@ tbody tr:hover {
     }
 
     .column4 {
-        text-align: left
+        text-align: center
     }
 
+    .column5,
     .column4,
     .column1,
     .column2,

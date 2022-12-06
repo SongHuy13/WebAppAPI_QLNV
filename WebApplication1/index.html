@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/jquery/dist/jquery.min.js"></script>   
+    <script src="lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script src="/lib/codemirror.js"></script>
     <script src="/lib/codemirror_jsx.js"></script>
@@ -27,8 +27,7 @@
 
 </head>
 
-<body>
-    
+<body >
     <dialog id="myDialog" style=" max-width: 500px; margin: auto;">
         <form style="background-color: antiquewhite;">
             <fieldset>
@@ -57,9 +56,9 @@
                         <label for="female">Nữ</label>
                     </div>
                 </div>
-                <div class="year">
-                    <label for="year">Năm sinh:</label>
-                    <select id="year" class="year" style="float: right;">
+                <div class="yearw">
+                    <label for="yearw">Năm sinh:</label>
+                    <select id="yearw" class="year" style="float: right;">
                         <option> Year</option>
                     </select>
                 </div>
@@ -68,29 +67,108 @@
             </fieldset>
         </form>
     </dialog>
-    <div id="success_message"></div>
-    <div class="limiter">
-        <div class="container-table100">
-            <div class="wrap-table100">
-                <div class="table100">
-                    <a href="#" class="btn btn-info" onclick="AddNew(0)">Add New</a> <br /><br />
-
-                    <table>
-                        <thead>
-                            <tr class="table100-head">
-                                <th class="column1">Mã nhân viên</th>
-                                <th class="column2">Họ tên</th>
-                                <th class="column3">Năm si nh</th>
-                                <th class="column4">Giới tính</th>
-                            </tr>
-                        </thead>
-                        <tbody id="load_data" style="text-align: center">
-                        </tbody>
-                    </table>
+    <!------------- Modal ------------->
+    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: forestgreen;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label for="">Mã nhân viên</label>
+                        <input type="text" class="idnv form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Họ tên</label>
+                        <input type="text" class="ho-ten form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Giới tính:</label>
+                        <div class="sex">
+                            <input class="radioBtnClass" type="radio" id="male" name="fav_language" value="true">
+                            <label for="male">Nam</label>
+                            <input class="radioBtnClass" type="radio" id="female" name="fav_language" value="false">
+                            <label for="female">Nữ</label>
+                        </div>
+                    </div>
+                    <div class="year">
+                        <label for="year" style="float: left">Năm sinh:</label>
+                        <select id="year" class="year" style="float: left;">
+                            <option> Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary add_staff">Save</button>
                 </div>
             </div>
         </div>
     </div>
+    <!---  End Modal    --->
+    <div id="smg"></div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            DANH SÁCH NHÂN VIÊN
+                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-right btn-sm">Add New</a> <br /><br />
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="table100-head">
+                                    <th class="column1">Mã nhân viên</th>
+                                    <th class="column2">Họ tên</th>
+                                    <th class="column3">Năm sinh</th>
+                                    <th class="column4">Giới tính</th>
+                                    <th class="column5" style="text-align: center">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="load_data" style="text-align: center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <!---------------------------------------->
+    <!--<div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100">
+                    <div class="card-header">
+                        <h4>
+                            DANH SÁCH NHÂN VIÊN
+                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-end btn-sm" onclick="AddNew(0)">Add New</a>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <thead>
+                                <tr class="table100-head">
+                                    <th class="column1">Mã nhân viên</th>
+                                    <th class="column2">Họ tên</th>
+                                    <th class="column3">Năm sinh</th>
+                                    <th class="column4">Giới tính</th>
+                                </tr>
+                            </thead>
+                            <tbody id="load_data" style="text-align: center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
     <!-- script -->
     <script>
         $(document).ready(function () {
@@ -111,10 +189,11 @@
                     $.each(rs, function (i, item) {
                         str += "<tr>";
                         str += "<td style='text-align: center' ><a href='#' onclick='javascript:showDialog(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
-                        str += "<td style='text-align: center'><a class='ho-ten'>" + item.hoTen + "</a></td>";
+                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
                         str += "<td style='text-align: center'>" + item.namSinh + "</td>";
                         str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
-                        str += "</a></tr>";
+                        str += "<td style='text-align: center'><button type ='button' value = '' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                        str += "</tr>";
 
                     });
 
@@ -144,7 +223,7 @@
         function closeDialog() {
             x.close();
         }
-        
+
         // UPDATE 2
         $("body").on("click", "#save", function (e) {
             e.preventDefault();
@@ -154,12 +233,6 @@
             _staff.hoTen = $("#ho-ten").val();
             _staff.gioiTinh = $('input[class="radioBtnClass"]:checked').val() === 'true' ? true : false;
             _staff.namSinh = $("#year").val();
-            var data = {
-                'maNV': $('#idnv').val(),
-                'hoTen': $('#ho-ten').val(),
-                'namSinh': $('#year').val(),
-                'gioiTinh': $('input[class="radioBtnClass"]:checked').val()
-            }
             $.ajax({
                 url: host + '/NhanVien/Edit/' + _staff.maNV,
                 type: 'PUT',
@@ -180,7 +253,7 @@
         });
 
         //
-        
+
         (function () {
             let year_selected = (new Date).getDate(); // current year
             let option = '';
@@ -194,8 +267,8 @@
             option += '</datalist>';
             document.getElementById("year").innerHTML = option;
         })();
-        //-------------------------------- TEST --------------
-            <!--    -->
+                        //-------------------------------- TEST --------------
+                            
             //if (r.status == 400) {
             //    $('#updateform_errList').html("");
             //    $('#updateform_errList').addClass('alert alert-danger');
@@ -212,75 +285,75 @@
             //    $('#success_message').addClass('alert alert-danger');
             //    $('#success_message').text(r.message);
             //    $('#myDialog').modal('hide');
-        // Data
-        function validateData() {
-            var txtID = $("#idnv").val();
-            var txtName = $("#ho-ten").val();
-            var sex = $('input[class="radioBtnClass"]:checked').val();
-            var txtYear = $("#year").val();
-            var errMsg = "";
-            var errCount = 0;
-            if (txtName.length <= 0) {
-                errCount++;
-                errMsg += "<li>Please enter Name.</li>";
-            }
-            if (txtID.length <= 0) {
-                errCount++;
-                errMsg += "<li>Please enter Email.</li>";
-            }
-            if (txtYear.length <= 0) {
-                errCount++;
-                errMsg += "<li>Please enter Age.</li>";
-            }
-            if (errCount > 0) {
+            // Data
+            function validateData() {
+                var txtID = $("#idnv").val();
+                var txtName = $("#ho-ten").val();
+                var sex = $('input[class="radioBtnClass"]:checked').val();
+                var txtYear = $("#year").val();
+                var errMsg = "";
+                var errCount = 0;
+                if (txtName.length <= 0) {
+                    errCount++;
+                    errMsg += "<li>Please enter Name.</li>";
+                }
+                if (txtID.length <= 0) {
+                    errCount++;
+                    errMsg += "<li>Please enter Email.</li>";
+                }
+                if (txtYear.length <= 0) {
+                    errCount++;
+                    errMsg += "<li>Please enter Age.</li>";
+                }
+                if (errCount > 0) {
 
-                $(".errMsg ul").remove()
-                $(".errMsg").append("<ul>" + errMsg + "</ul>");
-                $(".errMsg").slideDown('slow');
+                    $(".errMsg ul").remove()
+                    $(".errMsg").append("<ul>" + errMsg + "</ul>");
+                    $(".errMsg").slideDown('slow');
+                }
+                return errCount;
             }
-            return errCount;
-        }
-        // UPDATE 1
-        //function updateData() {
-        //    var errCount = validateData();
-        //    if (errCount == 0) {
-        //        //var _staff = {};
-        //        //_staff.maNV = $("#idnv").val();
-        //        //_staff.hoTen = $("#ho-ten").val();
-        //        //_staff.gioiTinh = $('input[class="radioBtnClass"]:checked').val();
-        //        //_staff.namSinh = $("#year").val();
+                        // UPDATE 1
+                        //function updateData() {
+                        //    var errCount = validateData();
+                        //    if (errCount == 0) {
+                        //        //var _staff = {};
+                        //        //_staff.maNV = $("#idnv").val();
+                        //        //_staff.hoTen = $("#ho-ten").val();
+                        //        //_staff.gioiTinh = $('input[class="radioBtnClass"]:checked').val();
+                        //        //_staff.namSinh = $("#year").val();
 
-        //        var data = {
-        //            'hoTen': $('#ho-ten').val(),
-        //            'namSinh': $('#year').val(),
-        //            'gioiTinh': $('input[class="radioBtnClass"]:checked').val()
-        //        }
-        //        $.ajax({
-        //            type: "PUT",
-        //            url: host + '/NhanVien/Edit:' + _staff.maNV,
-        //            data: data,
-        //            contentType: "application/json; charset=utf-8",
-        //            datatype: "jsondata",
-        //            async: "true",
-        //            success: function (response) {
-        //                $(".errMsg ul").remove();
-        //                var myObject = eval('(' + response.d + ')');
-        //                if (myObject > 0) {
-        //                    bindData();
-        //                    $(".errMsg").append("<ul><li>Data updated successfully</li></ul>");
-        //                }
-        //                else {
-        //                    $(".errMsg").append("<ul><li>Opppps something went wrong.</li></ul>");
-        //                }
-        //                $(".errMsg").show("slow");
-        //                clear();
-        //            },
-        //            error: function (response) {
-        //                alert(response.status + ' ' + response.statusText);
-        //            }
-        //        });
-        //    }
-        //}
+                        //        var data = {
+                        //            'hoTen': $('#ho-ten').val(),
+                        //            'namSinh': $('#year').val(),
+                        //            'gioiTinh': $('input[class="radioBtnClass"]:checked').val()
+                        //        }
+                        //        $.ajax({
+                        //            type: "PUT",
+                        //            url: host + '/NhanVien/Edit:' + _staff.maNV,
+                        //            data: data,
+                        //            contentType: "application/json; charset=utf-8",
+                        //            datatype: "jsondata",
+                        //            async: "true",
+                        //            success: function (response) {
+                        //                $(".errMsg ul").remove();
+                        //                var myObject = eval('(' + response.d + ')');
+                        //                if (myObject > 0) {
+                        //                    bindData();
+                        //                    $(".errMsg").append("<ul><li>Data updated successfully</li></ul>");
+                        //                }
+                        //                else {
+                        //                    $(".errMsg").append("<ul><li>Opppps something went wrong.</li></ul>");
+                        //                }
+                        //                $(".errMsg").show("slow");
+                        //                clear();
+                        //            },
+                        //            error: function (response) {
+                        //                alert(response.status + ' ' + response.statusText);
+                        //            }
+                        //        });
+                        //    }
+                        //}
 
     </script>
 
