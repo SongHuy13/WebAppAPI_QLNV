@@ -18,6 +18,9 @@
     <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KTCFC3S"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script src="js/site.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--------------           MAIN               ---------------->
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -28,16 +31,53 @@
 </head>
 
 <body>
-    <div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- DSNV LOAD DATA -->
+    <div id="smg"></div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            DANH SÁCH NHÂN VIÊN
+                            <a href="#" data-toggle="modal" data-target="#AddStaffModal"
+                                class="btn btn-primary float-right btn-sm" id="addStaff">Add New</a> <br /><br />
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped" id="example">
+                            <thead>
+                                <tr class="table100-head">
+                                    <th class="column1"><a href="#" class="btn btn-primary sort-manv"
+                                            data-dismiss="modal">Mã nhân viên</a></th>
+                                    <th class="column2"><a href="#" class="btn btn-primary sort-hoten"
+                                            data-dismiss="modal" >Họ tên </a> </th>
+                                    <th class="column3">Năm sinh</th>
+                                    <th class="column4">Giới tính</th>
+                                    <th class="column5" style="text-align: center">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="load_data" style="text-align: center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Load Data -->
+    <!-- Edit $ Update Modal -->
+    <div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: blanchedalmond;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
                         Cập nhật thông tin nhân viên
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
@@ -59,10 +99,7 @@
                     </div>
                     <div class="year">
                         <label for="year" style="float: left">Năm sinh:</label>
-                        <input list="year" name="year" id="years" >
-                        <datalist id="year">
-                            <option> Year</option>
-                        </datalist>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -72,10 +109,13 @@
             </div>
         </div>
     </div>
+    <!-- End Edit $ Update Modal -->
+
     <!------------- Modal Add Staff ------------->
-    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: blanchedalmond;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -96,15 +136,16 @@
                         <div class="sex">
                             <input class="radioBtnClassAdd" type="radio" id="maleAdd" name="fav_language" value="true">
                             <label for="male">Nam</label>
-                            <input class="radioBtnClassAdd" type="radio" id="femaleAdd" name="fav_language" value="false">
+                            <input class="radioBtnClassAdd" type="radio" id="femaleAdd" name="fav_language"
+                                value="false">
                             <label for="female">Nữ</label>
                         </div>
                     </div>
                     <div class="year">
                         <label for="yearAdd" style="float: left">Năm sinh:</label>
-                        <input list="yearAdd" name="yearAdd" id="yearsAdd">
-                        <datalist id="yearAdd">
-                            <option> Year</option>
+                        <input list="yearsAdd" name="yearAdd" id="yearAdd">
+                        <datalist id="yearsAdd">
+
                         </datalist>
                     </div>
                 </div>
@@ -116,42 +157,34 @@
         </div>
     </div>
     <!---  End Modal Add   --->
-    <div id="smg"></div>
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            DANH SÁCH NHÂN VIÊN
-                            <a href="#" data-toggle="modal" data-target="#AddStaffModal" class="btn btn-primary float-right btn-sm" id="addStaff">Add New</a> <br /><br />
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Mã nhân viên</th>
-                                    <th class="column2">Họ tên</th>
-                                    <th class="column3">Năm sinh</th>
-                                    <th class="column4">Giới tính</th>
-                                    <th class="column5" style="text-align: center">Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody id="load_data" style="text-align: center">
-                            </tbody>
-                        </table>
-                    </div>
+
+    <!--------------DELETE Modal--------------->
+    <div class="modal fade" id="DeleteStaffModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Staff Record</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="delete_staff_id">
+                    <br>
+                    <h5>Are You Sure? You Want To Delete This Record.</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary delete_staff_btn" data-dismiss="modal">Yes
+                        Delete</button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-------------------------------------- SCRIPT ------------------------------------ -->
     <script>
         var host = "https://localhost:44391/api";
         var x = document.getElementById("Edit");
-
 
         // LOAD DATA
         $(document).ready(function () {
@@ -172,7 +205,7 @@
                         str += "<td style='text-align: center'>" + item.hoTen + "</td>";
                         str += "<td style='text-align: center'>" + item.namSinh + "</td>";
                         str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
-                        str += "<td style='text-align: center'><button type ='button' value = '' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
                         str += "</tr>";
 
                     });
@@ -182,20 +215,49 @@
             });
         }
 
+        // SORT 
+        $(document).ready(function () {
+            $('#example').DataTable({
+                order: [[3, 'desc']],
+            });
+        });
+
+        // DELETE Staff
+        $("body").on("click", ".delete_staff", function (e) {
+            var manv_id = $(this).val();
+            $("#delete_staff_id").val(manv_id);
+            $(DeleteStaffModal).modal("show");
+        })
+        $("body").on("click", ".delete_staff_btn", function (e) {
+            e.preventDefault();
+
+            var manv_id = $("#delete_staff_id").val();
+
+            $.ajax({
+                url: host + '/NhanVien/Remove/' + manv_id,
+                type: 'DELETE',
+                success: function (response) {
+                    if (response.status == 500) {
+
+                        alert(response.message);
+                    } else {
+                        $('#smg').text(response.message);
+                        $(DeleteStaffModal).modal("hide");
+
+                    }
+                    LoadData();
+                }
+            })
+        })
+
         // Add Staff
         $("body").on("click", ".create", function (e) {
-            var data = {
-                'maNV': $('idnv').val(),
-                'hoTen': $('#ho-ten').val(),
-                'namSinh': $('#year').val(),
-                'gioiTinh': $('input[class="radioBtnClass"]:checked').val() === 'true' ? true : false,
-            }
             var _staff = {};
             _staff.maNV = $("#idnvAdd").val();
             _staff.hoTen = $("#ho-tenAdd").val();
             _staff.gioiTinh = $('input[class="radioBtnClassAdd"]:checked').val() === 'true' ? true : false;
             _staff.namSinh = $("#yearAdd").val();
-            console.log(data);
+            console.log(_staff);
             $.ajax({
                 type: 'POST',
                 url: host + '/NhanVien/Create',
@@ -213,7 +275,6 @@
                 }
             });
         });
-
 
 
         // Show Modal 1 NV
@@ -267,16 +328,15 @@
         (function () {
             let year_selected = (new Date).getDate(); // current year
             let option = '';
-            option = '<input list="years" name="year" id="year">< datalist id = "years" > '; // first option
+            option = ' '; // first option
             let year = new Date().getFullYear();
             for (let i = 1900; i <= year; i++) {
                 let year = (i <= 9) ? '0' + i : i;
                 let selected = (i === year_selected ? ' selected' : '');
                 option += '<option value="' + year + '"' + selected + '>' + year + '</option>';
             }
-            option += '</datalist>';
-            document.getElementById("year").innerHTML = option;
-            document.getElementById("yearAdd").innerHTML = option;
+            document.getElementById("years").innerHTML = option;
+            document.getElementById("yearsAdd").innerHTML = option;
         })();
 
     </script>

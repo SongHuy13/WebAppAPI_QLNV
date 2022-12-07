@@ -172,7 +172,7 @@ namespace MyWebApp.Controllers
         /// </summary>
         /// <param name="id">MaNV cần xóa</param>
         /// <returns></returns>
-        [HttpDelete("Remove:{id}")]
+        [HttpDelete("Remove/{id}")]
         public IActionResult Remove(string id)
         {
             try

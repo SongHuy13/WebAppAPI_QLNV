@@ -4,7 +4,13 @@
     padding: 0;
     box-sizing: border-box
 }
-
+.modal-content{
+    background-color: blanchedalmond;
+}
+h5 {
+    color: darkblue;
+    font-weight: bolder;
+}
 body,
 html {
     height: 100%;
