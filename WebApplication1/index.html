@@ -5,7 +5,7 @@
     <title>QLNV</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
 
     <!-- ----------------------------------------------------- -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -27,21 +27,21 @@
 
     <!--------------           MAIN               ---------------->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    
+
     <meta name="robots" content="noindex, follow">
     <style>
     </style>
 
 </head>
 
-<body>
+<body style="background-color:rgb(54, 138, 89)">
     <!-- DSNV LOAD DATA -->
     <div id="smg"></div>
     <div class="container py-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="background-color:rgb(255, 186, 88)">
                         <h4>
                             DANH SÁCH NHÂN VIÊN
                             <a href="#" data-toggle="modal" data-target="#AddStaffModal"
@@ -294,17 +294,11 @@
                 url: host + '/NhanVien/Remove/' + manv_id,
                 type: 'DELETE',
                 success: function (response) {
-                    if (response.status == 500) {
+                    $(DeleteStaffModal).modal("hide");
 
-                        alert(response.message);
-                    } else {
-                        $('#smg').text(response.message);
-                        $(DeleteStaffModal).modal("hide");
-
-                    }
                     LoadData();
                 }
-            })
+            });
         })
 
         // Add Staff
