@@ -5,6 +5,10 @@
     <title>QLNV</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--------------           MAIN               ---------------->
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- ----------------------------------------------------- -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -21,9 +25,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--------------           MAIN               ---------------->
-
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
     <meta name="robots" content="noindex, follow">
     <style>
     </style>
@@ -48,16 +50,29 @@
                         <table class="table table-bordered table-striped" id="example">
                             <thead>
                                 <tr class="table100-head">
-                                    <th class="column1"><a href="#" class="btn btn-primary sort-manv"
-                                            data-dismiss="modal">Mã nhân viên</a></th>
-                                    <th class="column2"><a href="#" class="btn btn-primary sort-hoten"
-                                            data-dismiss="modal" >Họ tên </a> </th>
-                                    <th class="column3">Năm sinh</th>
-                                    <th class="column4">Giới tính</th>
-                                    <th class="column5" style="text-align: center">Xóa</th>
+                                    <th class="column1"><a href="" class='btn btn - primary float - right btn - sm'
+                                            style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
+                                            onclick="LoadData()">Mã
+                                            nhân viên</a></th>
+                                    <th class="column2"><a href="#" class='btn btn - primary float - right btn - sm'
+                                            style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
+                                            onclick="Sort_Hoten()">Họ
+                                            tên </a> </th>
+                                    <th class="column3"><a href="" class='btn btn - primary float - right btn - sm'
+                                            style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
+                                            onclick="Sort_NamSinh()">Năm
+                                            sinh</a></th>
+                                    <th class="column4"><a href="" class='btn btn - primary float - right btn - sm'
+                                            style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
+                                            onclick="LoadData()">Giới
+                                            tính</a></th>
+                                    <th class="column5" style="text-align: center"> <a href=""
+                                            class='btn btn - primary float - right btn - sm' onclick="LoadData()"
+                                            style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;">Xóa</a>
+                                    </th>
                                 </tr>
                             </thead>
-                            <tbody id="load_data" style="text-align: center">
+                            <tbody id="load_data" class="load_data" style="text-align: center">
                             </tbody>
                         </table>
                     </div>
@@ -183,7 +198,7 @@
     </div>
     <!-------------------------------------- SCRIPT ------------------------------------ -->
     <script>
-        var host = "https://localhost:44391/api";
+        const host = "https://localhost:44391/api";
         var x = document.getElementById("Edit");
 
         // LOAD DATA
@@ -192,8 +207,54 @@
         });
         function LoadData() {
             $.ajax({
-                //host
                 url: host + '/NhanVien/DSNV',
+                type: 'GET',
+                success: function (rs) {
+                    console.log(rs);
+                    var str = "";
+                    $.each(rs, function (i, item) {
+                        str += "<tr>";
+                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
+                        str += "<td style='text-align: center'>" + item.namSinh + "</td>";
+                        str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
+                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                        str += "</tr>";
+
+                    });
+
+                    $('.load_data').html(str);
+                }
+            });
+        }
+
+        // SORT 
+        // SORT HoTen
+        function Sort_NamSinh() {
+            $.ajax({
+                url: host + '/NhanVien/SortNamSinh',
+                type: 'GET',
+                success: function (rs) {
+                    console.log(rs);
+                    var str = "";
+
+                    $.each(rs, function (i, item) {
+                        str += "<tr>";
+                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
+                        str += "<td style='text-align: center'>" + item.namSinh + "</td>";
+                        str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
+                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                        str += "</tr>";
+                    });
+                    $('.load_data').html(str);
+                }
+            });
+        }
+        // SORT HoTen
+        function Sort_Hoten() {
+            $.ajax({
+                url: host + '/NhanVien/SortHoTen',
                 type: 'GET',
                 success: function (rs) {
                     console.log(rs);
@@ -207,20 +268,11 @@
                         str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
                         str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
                         str += "</tr>";
-
                     });
-
-                    $('#load_data').html(str);
+                    $('.load_data').html(str);
                 }
             });
         }
-
-        // SORT 
-        $(document).ready(function () {
-            $('#example').DataTable({
-                order: [[3, 'desc']],
-            });
-        });
 
         // DELETE Staff
         $("body").on("click", ".delete_staff", function (e) {

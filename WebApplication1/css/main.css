@@ -1,16 +1,23 @@
-#success_message{ display: none;}
+#success_message {
+    display: none;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box
 }
-.modal-content{
+
+.modal-content {
     background-color: blanchedalmond;
 }
+
+
 h5 {
     color: darkblue;
     font-weight: bolder;
 }
+
 body,
 html {
     height: 100%;
@@ -18,8 +25,7 @@ html {
 }
 
 a {
-    margin: 0;
-    transition: all .4s;
+    margin: rgb(161, 161, 188) transition: all .4s;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
     -moz-transition: all .4s
@@ -204,6 +210,7 @@ tbody tr:hover {
     width: auto;
     text-align: center
 }
+
 .column5 {
     width: auto;
     text-align: center
