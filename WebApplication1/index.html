@@ -58,11 +58,11 @@
                                             nhân viên</a></th>
                                     <th class="column2"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
-                                            onclick="Sort_Hoten()">Họ
+                                            onclick="ajaxHelper.Sort_Hoten()">Họ
                                             tên </a> </th>
                                     <th class="column3"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
-                                            onclick="Sort_NamSinh()">Năm
+                                            onclick="ajaxHelper.Sort_NamSinh()">Năm
                                             sinh</a></th>
                                     <th class="column4"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
@@ -206,86 +206,109 @@
         const host = "https://localhost:44391/api";
         var x = document.getElementById("Edit");
 
-        // LOAD DATA
         $(document).ready(function () {
-            LoadData();
+            ajaxHelper.LoadData();
         });
-        function LoadData() {
-            $.ajax({
-                url: host + '/NhanVien/DSNV',
-                type: 'GET',
-                success: function (rs) {
-                    console.log(rs);
-                    var str = "";
-                    $.each(rs, function (i, item) {
-                        str += "<tr>";
-                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
-                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
-                        str += "<td style='text-align: center'>" + item.namSinh + "</td>";
-                        str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
-                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
-                        str += "</tr>";
 
-                    });
 
-                    $('.load_data').html(str);
-                }
-            });
-        }
+        var ajaxHelper = {
+            // LOAD DATA
+            LoadData: function () {
+                $.ajax({
+                    url: host + '/NhanVien/DSNV',
+                    type: 'GET',
+                    success: function (rs) {
+                        console.log(rs);
+                        var str = "";
+                        $.each(rs, function (i, item) {
+                            str += "<tr>";
+                            str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ajaxHelper.ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                            str += "<td style='text-align: center'>" + item.hoTen + "</td>";
+                            str += "<td style='text-align: center'>" + item.namSinh + "</td>";
+                            str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
+                            str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                            str += "</tr>";
 
-        // SORT 
-        // SORT HoTen
-        function Sort_NamSinh() {
-            $.ajax({
-                url: host + '/NhanVien/SortNamSinh',
-                type: 'GET',
-                success: function (rs) {
-                    console.log(rs);
-                    var str = "";
+                        });
 
-                    $.each(rs, function (i, item) {
-                        str += "<tr>";
-                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
-                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
-                        str += "<td style='text-align: center'>" + item.namSinh + "</td>";
-                        str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
-                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
-                        str += "</tr>";
-                    });
-                    $('.load_data').html(str);
-                }
-            });
-        }
-        // SORT HoTen
-        function Sort_Hoten() {
-            $.ajax({
-                url: host + '/NhanVien/SortHoTen',
-                type: 'GET',
-                success: function (rs) {
-                    console.log(rs);
-                    var str = "";
+                        $('.load_data').html(str);
+                    }
+                });
+            },
+            // SORT NamSinh
+            Sort_NamSinh: function () {
+                $.ajax({
+                    url: host + '/NhanVien/SortNamSinh',
+                    type: 'GET',
+                    success: function (rs) {
+                        console.log(rs);
+                        var str = "";
 
-                    $.each(rs, function (i, item) {
-                        str += "<tr>";
-                        str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
-                        str += "<td style='text-align: center'>" + item.hoTen + "</td>";
-                        str += "<td style='text-align: center'>" + item.namSinh + "</td>";
-                        str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
-                        str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
-                        str += "</tr>";
-                    });
-                    $('.load_data').html(str);
-                }
-            });
+                        $.each(rs, function (i, item) {
+                            str += "<tr>";
+                            str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                            str += "<td style='text-align: center'>" + item.hoTen + "</td>";
+                            str += "<td style='text-align: center'>" + item.namSinh + "</td>";
+                            str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
+                            str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                            str += "</tr>";
+                        });
+                        $('.load_data').html(str);
+                    }
+                });
+            },
+            // SORT HoTen
+            Sort_Hoten: function () {
+                $.ajax({
+                    url: host + '/NhanVien/SortHoTen',
+                    type: 'GET',
+                    success: function (rs) {
+                        console.log(rs);
+                        var str = "";
+
+                        $.each(rs, function (i, item) {
+                            str += "<tr>";
+                            str += "<td style='text-align: center' ><a href='#' data-toggle='modal' data-target='#Edit' class='btn btn - primary float - right btn - sm' data-target='#Edit' onclick='javascript:ShowModal(\"" + item.maNV + "\")' id='idNhanVien'>" + item.maNV + "</a></td>";
+                            str += "<td style='text-align: center'>" + item.hoTen + "</td>";
+                            str += "<td style='text-align: center'>" + item.namSinh + "</td>";
+                            str += "<td style='text-align: center'>" + (item.gioiTinh == false ? "Nữ" : "Nam") + "</td>";
+                            str += "<td style='text-align: center'><button type ='button' value = '" + item.maNV + "' class='delete_staff btn btn-danger btn-sm'>Xóa</button></td > ";
+                            str += "</tr>";
+                        });
+                        $('.load_data').html(str);
+                    }
+                });
+            },
+
+            // Show Modal 1 NV
+            ShowModal: function (maNV) {
+                $.ajax({
+                    url: host + '/NhanVien/FindByMaNV:' + maNV,
+                    type: 'GET',
+                    success: function (nv) {
+                        console.log(nv);
+                        $('#idnv').val(nv.maNV);
+                        $('#ho-ten').val(nv.hoTen);
+                        if (nv.gioiTinh == true) {
+                            $("#male").prop("checked", true);
+                        }
+                        else {
+                            $("#female").prop("checked", true);
+                        }
+                        $('#year').val(nv.namSinh);
+                    }
+                });
+            },
+
         }
 
         // DELETE Staff
-        $("body").on("click", ".delete_staff", function (e) {
+        $(".delete_staff").on("click", function (e) {
             var manv_id = $(this).val();
             $("#delete_staff_id").val(manv_id);
             $(DeleteStaffModal).modal("show");
         })
-        $("body").on("click", ".delete_staff_btn", function (e) {
+        $(".delete_staff_btn").on("click", function (e) {
             e.preventDefault();
 
             var manv_id = $("#delete_staff_id").val();
@@ -302,13 +325,12 @@
         })
 
         // Add Staff
-        $("body").on("click", ".create", function (e) {
+        $(".create").on("click", function () {
             var _staff = {};
             _staff.maNV = $("#idnvAdd").val();
             _staff.hoTen = $("#ho-tenAdd").val();
             _staff.gioiTinh = $('input[class="radioBtnClassAdd"]:checked').val() === 'true' ? true : false;
             _staff.namSinh = $("#yearAdd").val();
-            console.log(_staff);
             $.ajax({
                 type: 'POST',
                 url: host + '/NhanVien/Create',
@@ -326,30 +348,8 @@
                 }
             });
         });
-
-
-        // Show Modal 1 NV
-        function ShowModal(maNV) {
-            $.ajax({
-                url: host + '/NhanVien/FindByMaNV:' + maNV,
-                type: 'GET',
-                success: function (nv) {
-                    console.log(nv);
-                    $('#idnv').val(nv.maNV);
-                    $('#ho-ten').val(nv.hoTen);
-                    if (nv.gioiTinh == true) {
-                        $("#male").prop("checked", true);
-                    }
-                    else {
-                        $("#female").prop("checked", true);
-                    }
-                    $('#year').val(nv.namSinh);
-                }
-            });
-        }
-
         // UPDATE
-        $("body").on("click", ".edit", function (e) {
+        $(".edit").on("click", function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
             var _staff = {};

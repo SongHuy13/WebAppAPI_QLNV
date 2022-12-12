@@ -47,7 +47,7 @@ namespace MyWebApp.Controllers
                     NamSinh = nhanVien.NamSinh,
                     GioiTinh = nhanVien.GioiTinh
                 };
-                var check = _context.NhanViens.SingleOrDefault(nv => nv.MaNV == nhanvien.MaNV);
+                var check = _context.NhanViens.FirstOrDefault(nv => nv.MaNV == nhanvien.MaNV);
                 if (check != null)
                 {
                     return BadRequest("MaNV đã tồn tại!!!");
@@ -56,10 +56,9 @@ namespace MyWebApp.Controllers
                 if (nhanvien.MaNV == "" || nhanvien.HoTen == "")
                 {
                     return BadRequest("Không được để trống!!!");
-                }
-                var dt = DateTime.Now;
-                string year = dt.ToString("yyyy");
-                if (nhanvien.NamSinh > int.Parse(year) || nhanvien.NamSinh < 1900)
+                }   
+                var dt = DateTime.Now.Year;
+                if (nhanvien.NamSinh > dt || nhanvien.NamSinh < 1900)
                 {
                     return BadRequest("Năm sinh không thực!!!");
                 }
@@ -118,6 +117,10 @@ namespace MyWebApp.Controllers
                     nhanViens.AddRange(_context.NhanViens.Where(nv => nv.GioiTinh == Convert.ToBoolean(id)));
                     return Ok(nhanViens);
                 }
+                if (nhanViens == null)
+                {
+                    return BadRequest();
+                }
                 return Ok(new
                 {
                     Success = nhanViens.Count,
@@ -143,10 +146,6 @@ namespace MyWebApp.Controllers
             {
                 var nhanvien = _context.NhanViens.SingleOrDefault(nv => nv.MaNV == id);
 
-                if (id != nhanvien.MaNV)
-                {
-                    return BadRequest();
-                }
                 if (nhanvien == null)
                 {
                     return NotFound();
