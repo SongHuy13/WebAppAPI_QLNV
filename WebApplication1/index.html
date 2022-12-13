@@ -16,8 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script src="/lib/codemirror.js"></script>
-    <script src="/lib/codemirror_jsx.js"></script>
+    <script src="../lib/codemirror.js"></script>
+    <script src="../lib/codemirror_jsx.js"></script>
     <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KTCFC3S"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script src="js/site.js"></script>
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="background-color:rgb(255, 186, 88)">
+                    <div class="card-header" style="background-color: #fff">
                         <h4>
                             DANH SÁCH NHÂN VIÊN
                             <a href="#" data-toggle="modal" data-target="#AddStaffModal"
@@ -54,7 +54,7 @@
                                 <tr class="table100-head">
                                     <th class="column1"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
-                                            onclick="LoadData()">Mã
+                                            onclick="ajaxHelper.LoadData()">Mã
                                             nhân viên</a></th>
                                     <th class="column2"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
@@ -66,10 +66,10 @@
                                             sinh</a></th>
                                     <th class="column4"><a href="#" class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;"
-                                            onclick="LoadData()">Giới
+                                            onclick="ajaxHelper.LoadData()">Giới
                                             tính</a></th>
-                                    <th class="column5" style="text-align: center"> <a href=""
-                                            class='btn btn - primary float - right btn - sm' onclick="LoadData()"
+                                    <th class="column5" style="text-align: center"> <a
+                                            class='btn btn - primary float - right btn - sm'
                                             style="font-family: OpenSans-Regular; font-size: 18px; color: #fff; line-height: 1.2;font-weight: unset;">Xóa</a>
                                     </th>
                                 </tr>
@@ -208,6 +208,7 @@
 
         $(document).ready(function () {
             ajaxHelper.LoadData();
+            ajaxHelper.Year();
         });
 
 
@@ -234,6 +235,20 @@
                         $('.load_data').html(str);
                     }
                 });
+            },
+            // YEAR select
+            Year: function () {
+                let year_selected = (new Date).getDate(); // current year
+                let option = '';
+                option = ' '; // first option
+                let year = new Date().getFullYear();
+                for (let i = 1900; i <= year; i++) {
+                    let year = (i <= 9) ? '0' + i : i;
+                    let selected = (i === year_selected ? ' selected' : '');
+                    option += '<option value="' + year + '"' + selected + '>' + year + '</option>';
+                }
+                document.getElementById("years").innerHTML = option;
+                document.getElementById("yearsAdd").innerHTML = option;
             },
             // SORT NamSinh
             Sort_NamSinh: function () {
@@ -319,7 +334,7 @@
                 success: function (response) {
                     $(DeleteStaffModal).modal("hide");
 
-                    LoadData();
+                    ajaxHelper.LoadData();
                 }
             });
         })
@@ -344,7 +359,7 @@
                     } else {
                         alert("Staff not found.");
                     }
-                    LoadData();
+                    ajaxHelper.LoadData();
                 }
             });
         });
@@ -370,25 +385,12 @@
                     } else {
                         alert("Staff not found.");
                     }
-                    LoadData();
+                    ajaxHelper.LoadData();
                 }
             });
         });
 
-        // YEAR select
-        (function () {
-            let year_selected = (new Date).getDate(); // current year
-            let option = '';
-            option = ' '; // first option
-            let year = new Date().getFullYear();
-            for (let i = 1900; i <= year; i++) {
-                let year = (i <= 9) ? '0' + i : i;
-                let selected = (i === year_selected ? ' selected' : '');
-                option += '<option value="' + year + '"' + selected + '>' + year + '</option>';
-            }
-            document.getElementById("years").innerHTML = option;
-            document.getElementById("yearsAdd").innerHTML = option;
-        })();
+
 
     </script>
 
